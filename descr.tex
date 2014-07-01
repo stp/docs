@@ -1,3 +1,4 @@
+% vim: shiftwidth=2:tabstop=2:softtabstop=2:expandtab:textwidth=120:colorcolumn=120
 \documentclass{llncs}
 %\documentclass[llncs]{IEEEtran}
 
@@ -40,13 +41,23 @@ pdfproducer = {PdfLaTex}}
 \pagestyle{empty}
 
 \section{Introduction}
-STP\cite{Vijay:Thesis:2007} is an efficient open source solver for QF\_BV and arrays without extensionality. STP recursively simplifies bit-vector constraints, solves linear bit-vector equations, and then eagerly encodes them to CNF for solving. Array axioms are added as needed during an abstraction-refinement phase.
+STP\cite{Vijay:Thesis:2007} is an efficient open source solver for QF\_BV and arrays without extensionality. STP
+recursively simplifies bit-vector constraints, solves linear bit-vector equations, and then eagerly encodes them to CNF
+for solving. Array axioms are added as needed during an abstraction-refinement phase.
 
-The version of STP submitted to STMCOMP 2014 is revision fcfb30e8664 of STP's publicly available source code repository~\cite{STP:github}. It was compiled with a slightly tuned version of CryptoMiniSat~\cite{DBLP:conf/sat/SoosNC09} revision 7ae6c5123 available from its own public repository~\cite{CMS:github}.
+The version of STP submitted to STMCOMP 2014 is revision fcfb30e8664 of STP's publicly available source code
+repository~\cite{STP:github}. It was compiled with a slightly tuned version of
+CryptoMiniSat~\cite{DBLP:conf/sat/SoosNC09} revision 7ae6c5123 available from its own public
+repository~\cite{CMS:github}.
 
 
 \section{Development history}
-STP was originally developed by Vijay Ganesh under the supervision of Professor David Dill. Later releases were developed by Trevor Hansen under the supervision of Peter Schachte and Harald Søndergaard. STP handles arbitrary precision integers using Steffen Beyer's library. STP encodes into CNF via the and-inverter graph package ABC of Alan Mishchenko~\cite{Brayton:2010:AAI:2144310.2144317}. We found many defects using Robert Brummayer and Armin Biere's fuzzing and delta debugging tools~\cite{Brummayer:2009:FDS:1670412.1670413}. In the past year, STP has been actively developed on GitHub.
+STP was originally developed by Vijay Ganesh under the supervision of Professor David Dill. Later releases were
+developed by Trevor Hansen under the supervision of Peter Schachte and Harald Søndergaard. STP handles arbitrary
+precision integers using Steffen Beyer's library. STP encodes into CNF via the and-inverter graph package ABC of Alan
+Mishchenko~\cite{Brayton:2010:AAI:2144310.2144317}. We found many defects using Robert Brummayer and Armin Biere's
+fuzzing and delta debugging tools~\cite{Brummayer:2009:FDS:1670412.1670413}. In the past year, STP has been actively
+developed on GitHub.
 
 \section*{Acknowledgements}
 Thanks for everyone who submitted bug reports and pull requests and other useful data such as test cases.
