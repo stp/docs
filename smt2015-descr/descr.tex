@@ -45,10 +45,10 @@ STP\cite{Vijay:Thesis:2007} is an efficient open source solver for QF\_BV and ar
 recursively simplifies bit-vector constraints, solves linear bit-vector equations, and then eagerly encodes them to CNF
 for solving. Array axioms are added as needed during an abstraction-refinement phase.
 
-The version of STP submitted to STMCOMP 2015 is revision bff0edecbb7c08a of STP's publicly available source code
-repository~\cite{STP:github} with CryptoMiniSat4 revision 24db9219b180 set as default solver. CryptoMiniSat4 is
-available from its own public repository~\cite{CMS:github}.
-
+Two versions of STPs are submitted to STMCOMP 2015. Both are  revision bff0edecbb7c08a of STP's publicly available source code
+repository~\cite{STP:github}. The version with "-minisat-v15" uses MiniSat~\cite{MiniSat:github} revision
+37dc6c67 set as default solver. The verison with "-cryptominisat4-v15" contains CryptoMiniSat4~\cite{CMS:github}
+revision 24db9219b180 set as default solver.
 
 \section{Development history}
 STP was originally developed by Vijay Ganesh under the supervision of Professor David Dill. Later releases were
