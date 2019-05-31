@@ -1,0 +1,85 @@
+% vim: shiftwidth=2:tabstop=2:softtabstop=2:expandtab:textwidth=120:colorcolumn=120
+\documentclass{llncs}
+%\documentclass[llncs]{IEEEtran}
+
+\usepackage{microtype} %This gives MUCH better PDF results!
+%\usepackage[active]{srcltx} %DVI search
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb}
+\usepackage{fnbreak} %warn for split footnotes
+\usepackage{url}
+%\usepackage{qtree} %for drawing trees
+%\usepackage{fancybox} % if we need rounded corners
+%\usepackage{pict2e} % large circles can be drawn
+%\usepackage{courier} %for using courier in texttt{}
+%\usepackage{nth} %allows to \nth{4} to make 1st 2nd, etc.
+%\usepackage{subfigure} %allows to have side-by-side figures
+%\usepackage{booktabs} %nice tables
+%\usepackage{multirow} %allow multiple cells with rows in tabular
+\usepackage[utf8]{inputenc} % allows to write Faugere correctly
+\usepackage[bookmarks=true, citecolor=black, linkcolor=black, colorlinks=true]{hyperref}
+\hypersetup{
+pdfauthor = {Trevor Hansen, Mate Soos, Norbert Manthey},
+pdftitle = {STP},
+pdfsubject = {SMT Competition 2019},
+pdfkeywords = {SMT Solver},
+pdfcreator = {PdfLaTeX with hyperref package},
+pdfproducer = {PdfLaTex}}
+%\usepackage{butterma}
+
+%\usepackage{pstricks}
+%\usepackage{graphicx,epsfig,xcolor}
+%\usepackage[algoruled, linesnumbered, lined]{algorithm2e} %algorithms
+\setlength{\parskip}{1ex}
+\begin{document}
+\title{STP in the SMTCOMP 2019}
+\author{Mate Soos \and Trevor Hansen \and Norbert Manthey}
+\institute{
+National University of Singapore \and University of Melbourne \and CoNP Solutions
+}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+\section{Introduction}
+STP\cite{Vijay:Thesis:2007} is an efficient open source solver for QF\_BV and arrays without extensionality. STP recursively simplifies bit-vector constraints, solves linear bit-vector equations, and then eagerly encodes them to CNF for solving. Array axioms are added as needed during an abstraction-refinement phase.
+
+\section{Development history}
+STP was originally developed by Vijay Ganesh under the supervision of Professor David Dill. Later releases were developed by Trevor Hansen under the supervision of Peter Schachte and Harald Søndergaard. STP handles arbitrary precision integers using Steffen Beyer's library. STP encodes into CNF via the and-inverter graph package ABC of Alan Mishchenko~\cite{Brayton:2010:AAI:2144310.2144317}.
+STP supports different SAT backends, by now MiniSat~\cite{MiniSat:github}, CryptoMiniSat~\cite{CMS:github} and Riss~\cite{Riss:github}.
+
+\section{SMT Competition Specifics}
+
+While STP allows the SAT backends in an incremental way, where the backend is linked to STP itself, in the competition mode STP generates a SAT formula from the SMT input and calls a stand-alone SAT solver, and outputs ``sat'' or ``unsat''.
+We used this feature to submit several configurations that might provide insight into the differences between using a built-in solver versus an external one.
+
+For sequential, we submitted STP with the built-in CryptoMiniSat~\cite{CMS:github}, which also participates in the incremental track, as a base-line.
+Next, we used the same solver, but as external SAT solver, and added the solvers MiniSat~\cite{MiniSat:github}, Riss~\cite{Riss:github} and MergeSAT~\cite{MergeSAT:github} to compare against different systems.
+Finally, as parallel submissions, we submitted a variant where CryptoMiniSat uses all cores, and another one where MiniSat, Riss and MergeSAT use one core each, and CryptoMiniSat consumes all the others; to compare a multithreaded approach with sharing against a portfolio SAT solver.
+
+\section{Recent Developments to STP}
+Since SMT-COMP 2015 we have made progress at cleaning up the STP repository and adding tests in particular fuzz-tests.
+The STP repository contains a large number of automated testing, building and deployment scripts.
+Further, it contains a large test suite and more inner self-checks through asserts. STP is being actively developed on \href{https://github.com/stp/stp}{GitHub}.
+
+\section{Recent Developments to the Underlying SAT Solvers}
+The underlying SAT solver, CryptoMiniSat, has been significantly improved by including state-of-the-art techniques from past SAT competition winners and it has been tuned for the SMT use case.
+The way a SAT solver is used in a typical SAT competition scenario, i.e. when the solve() function is called only once, is very different than when used in a typical SMT scenario.
+Returning solutions quickly and close to one another is essential when the SAT solver is used from within an SMT solver.
+Hence CryptoMiniSat has been tuned to worked well in this sphere as well as in the regular, SAT competition, use case.
+
+The newly added SAT solver MergeSAT is a fork of the winner of the SAT Competition 2018, MapleLCMDistChronoBT.
+MergeSAT ports features that have been proposed in other solvers into that solver, enables incremental solving again, as well as makes the solver behavior reproducible again.
+
+\section*{Acknowledgements}
+Vijay Ganesh, Dan Liew and Ryan Govostes contributed to the STP code base.
+Furthermore, we would like to thank everyone who submitted bug reports, pull requests, and other useful data such as test cases.
+
+\bibliographystyle{splncs}
+\bibliography{sigproc}
+
+\vfill
+\pagebreak
+
+\end{document}
