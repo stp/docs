@@ -20,9 +20,9 @@
 \usepackage[utf8]{inputenc} % allows to write Faugere correctly
 % \usepackage[bookmarks=true, citecolor=black, linkcolor=black, colorlinks=true]{hyperref}
 % \hypersetup{
-% pdfauthor = {Trevor Hansen, Mate Soos, Norbert Manthey},
+% pdfauthor ={STP},
 % pdftitle = {STP},
-% pdfsubject = {SMT Competition 2019},
+% pdfsubject = {SMT Competition 2020},
 % pdfkeywords = {SMT Solver},
 % pdfcreator = {PdfLaTeX with hyperref package},
 % pdfproducer = {PdfLaTex}}
@@ -42,30 +42,34 @@
 \pagestyle{empty}
 
 \section{Introduction}
-STP\cite{Vijay:Thesis:2007} is an efficient open source solver for QF\_BV and arrays without extensionality. STP recursively simplifies bit-vector constraints, solves linear bit-vector equations, and then eagerly encodes them to CNF for solving. Array axioms are added as needed during an abstraction-refinement phase.
+STP\cite{Vijay:Thesis:2007} is an open-source solver for QF\_BV and arrays without extensionality. 
+STP recursively simplifies bit-vector constraints, solves linear bit-vector equations, and then eagerly encodes them to CNF for solving. 
+Array axioms are added as needed during an abstraction-refinement phase.
 
 \section{Development history}
-STP was originally developed by Vijay Ganesh under the supervision of Professor David Dill. Later releases were developed by Trevor Hansen under the supervision of Peter Schachte and Harald Søndergaard. STP handles arbitrary precision integers using Steffen Beyer's library. STP encodes into CNF via the and-inverter graph package ABC of Alan Mishchenko~\cite{Brayton:2010:AAI:2144310.2144317}.
-STP supports different SAT backends, by now MiniSat~\cite{MiniSat:github}, CryptoMiniSat~\cite{CMS:github} and Riss~\cite{Riss:github}.
+STP was originally developed by Vijay Ganesh under the supervision of Professor David Dill. 
+Later releases were developed by Trevor Hansen under the supervision of Peter Schachte and Harald Søndergaard. 
+STP handles arbitrary precision integers using Steffen Beyer's library. 
+STP encodes into CNF via the and-inverter graph package ABC of Alan Mishchenko~\cite{Brayton:2010:AAI:2144310.2144317}.
+STP supports different SAT backends: MiniSat~\cite{MiniSat:github}, CryptoMiniSat~\cite{CMS:github} and Riss~\cite{Riss:github}.
 
 \section{Recent Developments to STP}
-Since SMT-COMP 2019 we have:
-* Improved the build scripts - Christian Cadar, Andrew Vaughan, Mate Soos,BP Foley, 
-* Improved how speculative simplifications are applied - Trevor Hansen
+In the last year:
+
+Andrew V. Jones, Mate Soos, Christian Cadar, Brian Foley, Ryan Govostes, Gleb Popov, and Ondřej Súkup have improved the build scripts. 
+
+Trevor Hansen, has improved how speculative simplifications are applied.
 
 
 \section{Recent Developments to the Underlying SAT Solvers}
-The underlying SAT solver, CryptoMiniSat, has been significantly improved by including state-of-the-art techniques from past SAT competition winners and it has been tuned for the SMT use case.
-The way a SAT solver is used in a typical SAT competition scenario, i.e. when the solve() function is called only once, is very different than when used in a typical SMT scenario.
-Returning solutions quickly and close to one another is essential when the SAT solver is used from within an SMT solver.
-Hence CryptoMiniSat has been tuned to worked well in this sphere as well as in the regular, SAT competition, use case.
+CryptoMinisat (\emph{CMS}) has been augmented with the Stochastic Local Search (SLS)~\cite{DBLP:conf/sat/CaiLS15} solver CCAnr. 
+CryptoMiniSat aims to be a modern, open-source SAT solver using inprocessing techniques, optimized data structures and finely-tuned timeouts to have good control over both memory and time usage of inprocessing steps. It also supports, when compiled as such, to recover XOR constraints and perform Gauss-Jordan elimination on them at every decision level. CryptoMiniSat is authored by Mate Soos. CCAnr~\cite{DBLP:conf/sat/CaiLS15} is a stochastic local search (SLS) solver for SAT, which is based on the configuration checking strategy and has good performance on non-random SAT instances. 
 
-The SAT solver MergeSAT is a fork of the winner of the SAT Competition 2018, MapleLCMDistChronoBT.
+The SAT solver MergeSAT is a fork of the winner of the SAT Competition 2018, MapleLCMDistChronoBT. MergeSAT is authored by Norbert Manthey. 
 MergeSAT ports features that have been proposed in other solvers into that solver, enables incremental solving again, as well as makes the solver behavior reproducible again.
 
 \section*{Acknowledgements}
-Vijay Ganesh, Dan Liew and Ryan Govostes contributed to the STP code base.
-Furthermore, we would like to thank everyone who submitted bug reports, pull requests, and other useful data such as test cases.
+Vijay Ganesh, Dan Liew and Ryan Govostes contributed substantialy to the STP code base.
 
 \bibliographystyle{splncs}
 \bibliography{sigproc}
