@@ -59,8 +59,11 @@ Andrew V. Jones and Mate Soos have considerably improved the build system.
 Mate Soos and Norbert Manthey have got the distributed and parallel versions of STP working. 
 Trevor Hansen has sped up some simplifications. 
 
+\section{Cloud Track Version}
+The cloud track version of the solver uses STP only to translate the SMTLIB2 problem to CNF. Then it uses the MPI version of CryptoMiniSat to solve the CNF. This solver synchronizes clients to each other through the main process. The main process uses MPI broadcast to send the CNF to all clients. The clients then try to solve the CNF, and send an update with all 0-level variable values and all new binary clauses to the main process every 30k conflicts. The main process then sends to each client individually the cumulative information after it has received more than half the clients' data. Clients indicate to the main in case they found a solution, which in turn informs all clients, prints the solution, and exits. Each client runs its own multi-threaded solver, synchronized every 10k conflicts, in-memory, without the use of MPI.
+
 \section*{Acknowledgements}
-Vijay Ganesh, Dan Liew, Mate Soos and Ryan Govostes contributed substantialy to the STP code base.
+Vijay Ganesh, Dan Liew, Mate Soos and Ryan Govostes contributed substantially to the STP code base.
 
 \bibliographystyle{splncs}
 \bibliography{sigproc}
