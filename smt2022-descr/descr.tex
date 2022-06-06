@@ -55,9 +55,9 @@ By default STP uses CryptoMiniSat~\cite{CMS:github}, but also can use MiniSat~\c
 \section{Recent Developments to STP}
 In the last year contributors to STP have:
 \begin{itemize}
-\item {further improved its build system, so that it builds reliably on more platforms.}
-\item {added better domain analysis for strength reductions. When this simplification determines, for example, that the most significant bits of the operand to a signed division are known, it replaces it with an unsigned division.}
-\item {Reimplemented the variable elmination simplification. This simplification substitutes through to remove variables from the problem. }
+\item {Further improved its build system, so that it builds reliably on more platforms.}
+\item {Added better domain analysis for strength reductions. When this simplification determines, for example, that the most significant bits of the operand to a signed division are known, it replaces it with an unsigned division.}
+\item {Reimplemented the variable elmination simplification. This simplification substitutes through-out to completely remove a variable from the problem. }
 \item {Added a simplification to create fresh variables when extracts from a variable do not overlap.}
 \end{itemize}
 
