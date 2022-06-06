@@ -1,0 +1,1 @@
+../smt2016-descr/splncs.bst
