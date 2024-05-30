@@ -1,0 +1,47 @@
+\begin{thebibliography}{1}
+
+\bibitem{Vijay:Thesis:2007}
+Ganesh, V.:
+\newblock {Decision Procedures for Bit-Vectors, Arrays and Integers}.
+\newblock PhD thesis, Computer Science Department, Standford University, CA,
+  United States (2007)
+
+\bibitem{Trevor:Thesis:2012}
+Hansen, T.:
+\newblock {A constraint solver and its application to machine code test
+  generation}.
+\newblock PhD thesis, Department of Computing and Information Systems, The
+  University of Melbourne, Melbourne, Australia (2012)
+
+\bibitem{Brayton:2010:AAI:2144310.2144317}
+Brayton, R., Mishchenko, A.:
+\newblock Abc: An academic industrial-strength verification tool.
+\newblock In: Proceedings of the 22Nd International Conference on Computer
+  Aided Verification. CAV'10, Berlin, Heidelberg, Springer-Verlag (2010)
+  24--40
+
+\bibitem{CMS:github}
+Soos, M.:
+\newblock {GitHub} repository for {CryptoMiniSat} (June 2022)
+  https://github.com/msoos/cryptominisat.
+
+\bibitem{MiniSat:github}
+Niklas~Sörensson, N.E.:
+\newblock {GitHub} repository for {MiniSat} (June 2022)
+  https://github.com/niklasso/minisat.
+
+\bibitem{Riss:github}
+Manthey, N.:
+\newblock {GitHub} repository for {Riss} (June 2022)
+  https://github.com/conp-solutions/riss.
+
+\bibitem{cadical}
+Biere, A., Fazekas, K., Fleury, M., Heisinger, M.:
+\newblock {CaDiCaL}, {Kissat}, {Paracooba}, {Plingeling} and {Treengeling}
+  entering the {SAT Competition 2020}.
+\newblock In Balyo, T., Froleyks, N., Heule, M., Iser, M., J{\"a}rvisalo, M.,
+  Suda, M., eds.: Proc.~of {SAT Competition} 2020 -- Solver and Benchmark
+  Descriptions. Volume B-2020-1 of Department of Computer Science Report Series
+  B., University of Helsinki (2020)  51--53
+
+\end{thebibliography}

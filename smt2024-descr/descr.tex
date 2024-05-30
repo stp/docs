@@ -1,0 +1,95 @@
+% vim: shiftwidth=2:tabstop=2:softtabstop=2:expandtab:textwidth=120:colorcolumn=120
+% \documentclass{llncs}
+\documentclass{easychair}
+%\documentclass[llncs]{IEEEtran}
+
+\usepackage{microtype} %This gives MUCH better PDF results!
+%\usepackage[active]{srcltx} %DVI search
+% \usepackage[cmex10]{amsmath}
+% \usepackage{amssymb}
+\usepackage{fnbreak} %warn for split footnotes
+\usepackage{url}
+%\usepackage{qtree} %for drawing trees
+%\usepackage{fancybox} % if we need rounded corners
+%\usepackage{pict2e} % large circles can be drawn
+%\usepackage{courier} %for using courier in texttt{}
+%\usepackage{nth} %allows to \nth{4} to make 1st 2nd, etc.
+%\usepackage{subfigure} %allows to have side-by-side figures
+%\usepackage{booktabs} %nice tables
+%\usepackage{multirow} %allow multiple cells with rows in tabular
+\usepackage[utf8]{inputenc} % allows to write Faugere correctly
+% \usepackage[bookmarks=true, citecolor=black, linkcolor=black, colorlinks=true]{hyperref}
+% \hypersetup{
+% pdfauthor ={STP},
+% pdftitle = {STP},
+% pdfsubject = {SMT Competition 2024},
+% pdfkeywords = {SMT Solver},
+% pdfcreator = {PdfLaTeX with hyperref package},
+% pdfproducer = {PdfLaTex}}
+%\usepackage{butterma}
+
+%\usepackage{pstricks}
+%\usepackage{graphicx,epsfig,xcolor}
+%\usepackage[algoruled, linesnumbered, lined]{algorithm2e} %algorithms
+\setlength{\parskip}{1ex}
+\begin{document}
+\title{STP at the SMTCOMP 2024}
+\author{Various}
+\institute{}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+\section{Background}
+STP\cite{Vijay:Thesis:2007, Trevor:Thesis:2012} is an open-source solver for QF\_BV and arrays without extensionality. 
+STP recursively simplifies bit-vector constraints, solves linear bit-vector equations, and then eagerly encodes to CNF for solving. 
+Array axioms are added as needed during an abstraction-refinement phase.
+
+STP was originally developed by Vijay Ganesh under the supervision of Professor David Dill. 
+Later releases were developed by Trevor Hansen under the supervision of Peter Schachte and Harald Søndergaard. 
+STP handles arbitrary precision integers using Steffen Beyer's library. 
+STP encodes into CNF via the and-inverter graph package ABC of Alan Mishchenko~\cite{Brayton:2010:AAI:2144310.2144317}.
+By default STP uses CryptoMiniSat~\cite{CMS:github}, but also can use MiniSat~\cite{MiniSat:github}, Riss~\cite{Riss:github} or CaDiCAL \cite{cadical}.
+
+\section{Recent Developments to STP}
+In the last year contributors to STP have:
+\begin{itemize}
+\item{Improved the sharing-aware rewriting.}
+\end{itemize}
+
+\iffalse
+	\section{Parallel Track Version}
+
+	For the parallel track, STP is used to generate a CNF formula.
+	Once this formula is generated, a parallel portfolio of SAT solvers is used.
+	This portfolio calls external SAT solver binaries, in order:
+	%
+	\begin{enumerate}
+	 \item CryptoMiniSat~\cite{CMS:github}
+	 \item MergeSat~\cite{MergeSAT:github}
+	 \item Riss~\cite{Riss:github}
+	 \item MiniSat~\cite{MiniSat:github}
+	\end{enumerate}
+	%
+	Before starting these solvers, the number of available compute resources is detected.
+	In case less equal four compute resources are detected, the given number of solvers in the above order is started.
+	In case we detect more than four cores, we assign the remaining cores to CryptoMiniSat.
+	Then, this solver will run in its internal portfolio mode with knowledge sharing enabled.
+
+	\section{Cloud Track Version}
+	The cloud track version of the solver uses STP only to translate the SMTLIB2 problem to CNF. Then it uses the MPI version of CryptoMiniSat to solve the CNF. This solver synchronizes clients to each other through the main process. The main process uses MPI broadcast to send the CNF to all clients. The clients then try to solve the CNF, and send an update with all 0-level variable values and all new binary clauses to the main process every 30k conflicts. The main process then sends to each client individually the cumulative information after it has received more than half the clients' data. Clients indicate to the main in case they found a solution, which in turn informs all clients, prints the solution, and exits. Each client runs its own multi-threaded solver, synchronized every 10k conflicts, in-memory, without the use of MPI.
+\fi
+
+
+\section*{Acknowledgements}
+Vijay Ganesh, Dan Liew, Mate Soos and Ryan Govostes contributed substantially to the STP code base.
+
+\bibliographystyle{splncs}
+\bibliography{sigproc}
+
+\vfill
+\pagebreak
+
+\end{document}
+
